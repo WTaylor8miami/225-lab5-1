@@ -8,7 +8,7 @@ def connect_db():
     return sqlite3.connect(DATABASE)
 
 def clear_test_data():
-    """Clear only the test contacts from the database."""
+    """Clear only the test reviews from the database."""
     db = connect_db()
     # Assuming all test contacts follow a specific naming pattern
     db.execute("DELETE FROM reviews WHERE name LIKE 'Test Name %'")
