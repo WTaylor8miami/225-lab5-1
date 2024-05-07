@@ -13,8 +13,8 @@ def generate_test_data(num_reviews):
     for i in range(num_reviews):
         ProductName = f'Test Name {i}'
         Reviewer = f'Test Name {i}'
-        Date = f'0-0-0000{i}'
-        ProductReview = f'Product is great!{i}'
+        Date = f'Test Name{i}'
+        ProductReview = f'Test Name!{i}'
         db.execute('INSERT INTO reviews (Date, ProductName, Reviewer, ProductReview) VALUES (?, ?, ?, ?)', (Date, ProductName, Reviewer, ProductReview))
     db.commit()
     print(f'{num_reviews} test reviews added to the database.')
