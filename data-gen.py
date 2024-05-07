@@ -11,11 +11,11 @@ def generate_test_data(num_reviews):
     """Generate test data for the reviews table."""
     db = connect_db()
     for i in range(num_reviews):
-        product_name = f'Test Name {i}'
-        reviewer = f'Test Name {i}'
-        date = f'0-0-0000{i}'
-        product_review = f'Product is great!{i}'
-        db.execute('INSERT INTO reviews (date, product_name, reviewer, product_review) VALUES (?, ?, ?, ?)', (date, product_name, reviewer, product_review))
+        ProductName = f'Test Name {i}'
+        Reviewer = f'Test Name {i}'
+        Date = f'0-0-0000{i}'
+        ProductReview = f'Product is great!{i}'
+        db.execute('INSERT INTO reviews (Date, ProductName, Reviewer, ProductReview) VALUES (?, ?, ?, ?)', (Date, ProductName, Reviewer, ProductReview))
     db.commit()
     print(f'{reviews} test reviews added to the database.')
     db.close()
