@@ -65,23 +65,32 @@ def index():
             <h2>Add Review</h2>
             <form method="POST" action="/">
                 <label for="name">Name:</label><br>
-                <input type="text" id="name" name="name" required><br>
-                <label for="phone">Phone Number:</label><br>
-                <input type="text" id="phone" name="phone" required><br><br>
+                <input type="text" id="name" name="name" required><be>
+                <label for="Date">Date:</label><br>
+                <input type="text" id="Date" name="Date" required><br><br>
+                <label for="ProductName">Product Name:</label><br>
+                <input type="text" id="ProductName" name="ProductName" required><br><br>
+                <label for="ProductReview">Product Review:</label><br>
+                <input type="text" id="ProductReview" name="ProductReview" required><br><br>
+                
                 <input type="submit" value="Submit">
             </form>
             <p>{{ message }}</p>
             {% if contacts %}
                 <table border="1">
                     <tr>
-                        <th>Name</th>
-                        <th>Phone Number</th>
+                        <th>Reviewer</th>
+                        <th>Date</th>
+                        <th>Product Name</th>
+                        <th>Prodcut Review</th>
                         <th>Delete</th>
                     </tr>
                     {% for contact in contacts %}
                         <tr>
-                            <td>{{ contact['name'] }}</td>
-                            <td>{{ contact['phone'] }}</td>
+                            <td>{{ Reviews['Reviewer'] }}</td>
+                            <td>{{ Reviews['Date'] }}</td>
+                            <td>{{ Reviews['ProductName'] }}</td>
+                            <td>{{ Reviews['ProductReview'] }}</td>
                             <td>
                                 <form method="POST" action="/">
                                     <input type="hidden" name="reviews_id" value="{{ reviews['id'] }}">
