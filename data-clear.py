@@ -17,4 +17,4 @@ def clear_test_data():
     db.close()
 
 if __name__ == '__main__':
-    clear_test_contacts()
+    clear_test_data()
