@@ -10,7 +10,7 @@ def connect_db():
 def clear_test_data():
     """Clear only the test reviews from the database."""
     db = connect_db()
-    # Assuming all test contacts follow a specific naming pattern
+    # Assuming all test reviews follow a specific naming pattern
     db.execute("DELETE FROM reviews WHERE name LIKE 'Test Name %'")
     db.commit()
     print('Test data has been deleted from the database.')
