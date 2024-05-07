@@ -13,7 +13,7 @@ class TestContacts(unittest.TestCase):
         firefox_options.add_argument("--disable-dev-shm-usage")
         self.driver = webdriver.Firefox(options=firefox_options)
 
-    def test_contacts(self):
+    def test_reviews(self):
         driver = self.driver
         driver.get("http://10.48.10.199")  # Replace with your target website
         
