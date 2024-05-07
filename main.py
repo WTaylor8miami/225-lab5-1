@@ -38,11 +38,11 @@ def index():
             db.commit()
             message = 'Contact deleted successfully.'
         else:
-            ProductName = request.form.get('product_name')
-            Reviewer = request.form.get('reviewer')
-            Date = request.form.get('date')
-            ProductReview = request.form.get('product_review')
-            if ProductName and Reviewer and date and ProductReview:
+            product_name = request.form.get('product_name')
+            reviewer = request.form.get('reviewer')
+            date = request.form.get('date')
+            product_review = request.form.get('product_review')
+            if product_name and reviewer and date and product_review:
                 db = get_db()
                 db.execute('INSERT INTO reviews (product_name, reviewer, date, product_review) VALUES (?, ?, ?, ?)', (product_name, reviewer, date, product_review))
                 db.commit()
