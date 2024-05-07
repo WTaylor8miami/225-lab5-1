@@ -64,7 +64,7 @@ def index():
         <body>
             <h2>Add Review</h2>
             <form method="POST" action="/">
-                <label for="Reviewer">Name:</label><br>
+                <label for="Reviewer">Reviewer:</label><br>
                 <input type="text" id="Reviewer" name="Reviewer" required><br>
                 <label for="Date">Date:</label><br>
                 <input type="text" id="Date" name="Date" required><br><br>
@@ -76,7 +76,7 @@ def index():
                 <input type="submit" value="Submit">
             </form>
             <p>{{ message }}</p>
-            {% if reviewss %}
+            {% if reviews %}
                 <table border="1">
                     <tr>
                         <th>Reviewer</th>
@@ -85,7 +85,7 @@ def index():
                         <th>Prodcut Review</th>
                         <th>Delete</th>
                     </tr>
-                    {% for reviews in reviewss %}
+                    {% for reviews in reviews %}
                         <tr>
                             <td>{{ Reviews['Reviewer'] }}</td>
                             <td>{{ Reviews['Date'] }}</td>
