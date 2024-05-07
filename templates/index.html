@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<h1>Review a Product by Filing out the Form</h1>
+{% endblock %}
+
+{% block body %}
+<div class = "content">
+    <form action="/" method="POST">
+        <div class="uNameBox">
+            <label for="uNameBox">Username</label>
+            <input type="text" name="uNameBox" id="uNameBox">
+        </div>
+        <div>
+            <label for="productName">Product</label>
+            <input type="text" name="productNameBox" id="productNameBox">
+        </div>
+        <div class="reviewBox">
+            <label for="reviewBox">What do you think of the product?</label>
+            <input type="text" name="reviewBox" id="reviewBox">
+        </div>
+        <input type="submit" value="Post Review" id="postButton">
+    </from>
+</div>
+
+<div class="table">
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Product Name</th>
+            <th>Reviewer</th>
+            <th>Product Review</th>
+        </tr>
+        {% for review in reviews %}
+            <tr>
+                <td>{{ review.date_created }}</td>
+                <td>{{ review.productName }}</td>
+                <td>{{ review.uName }}</td>
+                <td>{{ review.review }}</td>
+            </tr>
+        {% endfor %}    
+    </table>
+</div>
+
+{% endblock %}
+
+
