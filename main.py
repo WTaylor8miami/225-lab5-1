@@ -65,7 +65,7 @@ def index():
             <h2>Add Review</h2>
             <form method="POST" action="/">
                 <label for="reviewer">Name:</label><br>
-                <input type="text" id="reviewer" name="reviewer" required><be>
+                <input type="text" id="reviewer" name="reviewer" required><br>
                 <label for="date">Date:</label><br>
                 <input type="text" id="Date" name="Date" required><br><br>
                 <label for="product_name">Product Name:</label><br>
