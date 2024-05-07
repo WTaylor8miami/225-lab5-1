@@ -1,47 +1,24 @@
-{% extends 'base.html' %}
-
-{% block head %}
-<h1>Review a Product by Filing out the Form</h1>
-{% endblock %}
-
-{% block body %}
-<div class = "content">
-    <form action="/" method="POST">
-        <div class="uNameBox">
-            <label for="uNameBox">Username</label>
-            <input type="text" name="uNameBox" id="uNameBox">
-        </div>
-        <div>
-            <label for="productName">Product</label>
-            <input type="text" name="productNameBox" id="productNameBox">
-        </div>
-        <div class="reviewBox">
-            <label for="reviewBox">What do you think of the product?</label>
-            <input type="text" name="reviewBox" id="reviewBox">
-        </div>
-        <input type="submit" value="Post Review" id="postButton">
-    </from>
-</div>
-
-<div class="table">
-    <table>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Database Table</title>
+</head>
+<body>
+    <h1>Database Table Contents</h1>
+    <table border="1">
         <tr>
-            <th>Date</th>
-            <th>Product Name</th>
-            <th>Reviewer</th>
-            <th>Product Review</th>
+            <th>ID</th>
+            <th>Data</th>
         </tr>
-        {% for review in reviews %}
-            <tr>
-                <td>{{ review.date }}</td>
-                <td>{{ review.product_name }}</td>
-                <td>{{ review.reviewer }}</td>
-                <td>{{ review.product_review }}</td>
-            </tr>
-        {% endfor %}    
+        {% for row in rows %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+        </tr>
+        {% endfor %}
     </table>
-</div>
-
-{% endblock %}
-
-
+</body>
+</html>
