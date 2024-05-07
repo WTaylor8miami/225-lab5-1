@@ -87,10 +87,10 @@ def index():
                     </tr>
                     {% for reviews in reviews %}
                         <tr>
-                            <td>{{ Reviews['Reviewer'] }}</td>
-                            <td>{{ Reviews['Date'] }}</td>
-                            <td>{{ Reviews['ProductName'] }}</td>
-                            <td>{{ Reviews['ProductReview'] }}</td>
+                            <td>{{ reviews['Reviewer'] }}</td>
+                            <td>{{ reviews['Date'] }}</td>
+                            <td>{{ reviews['ProductName'] }}</td>
+                            <td>{{ reviews['ProductReview'] }}</td>
                             <td>
                                 <form method="POST" action="/">
                                     <input type="hidden" name="reviews_id" value="{{ reviews['id'] }}">
