@@ -33,10 +33,10 @@
         </tr>
         {% for review in reviews %}
             <tr>
-                <td>{{ review.date_created }}</td>
-                <td>{{ review.productName }}</td>
-                <td>{{ review.uName }}</td>
-                <td>{{ review.review }}</td>
+                <td>{{ review.date }}</td>
+                <td>{{ review.product_name }}</td>
+                <td>{{ review.reviewer }}</td>
+                <td>{{ review.product_review }}</td>
             </tr>
         {% endfor %}    
     </table>
