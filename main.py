@@ -32,11 +32,11 @@ def index():
     if request.method == 'POST':
         # Check if it's a delete action
         if request.form.get('action') == 'delete':
-            contact_id = request.form.get('reviews_id')
+            reviews_id = request.form.get('reviews_id')
             db = get_db()
             db.execute('DELETE FROM reviews WHERE id = ?', (reviews_id,))
             db.commit()
-            message = 'Contact deleted successfully.'
+            message = 'Reviews deleted successfully.'
         else:
             product_name = request.form.get('product_name')
             reviewer = request.form.get('reviewer')
@@ -50,11 +50,11 @@ def index():
             else:
                 message = 'Missing information.'
 
-    # Always display the contacts table
+    # Always display the reviewss table
     db = get_db()
     reviews = db.execute('SELECT * FROM reviews').fetchall()
 
-    # Display the HTML form along with the contacts table
+    # Display the HTML form along with the reviewss table
     return render_template_string('''
         <!DOCTYPE html>
         <html>
@@ -76,7 +76,7 @@ def index():
                 <input type="submit" value="Submit">
             </form>
             <p>{{ message }}</p>
-            {% if contacts %}
+            {% if reviewss %}
                 <table border="1">
                     <tr>
                         <th>Reviewer</th>
@@ -85,7 +85,7 @@ def index():
                         <th>Prodcut Review</th>
                         <th>Delete</th>
                     </tr>
-                    {% for contact in contacts %}
+                    {% for reviews in reviewss %}
                         <tr>
                             <td>{{ Reviews['reviewer'] }}</td>
                             <td>{{ Reviews['date'] }}</td>
