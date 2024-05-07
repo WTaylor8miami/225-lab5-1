@@ -16,10 +16,12 @@ def init_db():
     with app.app_context():
         db = get_db()
         db.execute('''
-            CREATE TABLE IF NOT EXISTS contacts (
+            CREATE TABLE IF NOT EXISTS reviews (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT NOT NULL,
-                phone TEXT NOT NULL
+                ProductName TEXT NOT NULL,
+                Reviewer TEXT NOT NULL,
+                Date TEXT NOT NULL,
+                ProductReview Text Not Null
             );
         ''')
         db.commit()
@@ -30,35 +32,37 @@ def index():
     if request.method == 'POST':
         # Check if it's a delete action
         if request.form.get('action') == 'delete':
-            contact_id = request.form.get('contact_id')
+            contact_id = request.form.get('reviews_id')
             db = get_db()
-            db.execute('DELETE FROM contacts WHERE id = ?', (contact_id,))
+            db.execute('DELETE FROM reviews WHERE id = ?', (reviews_id,))
             db.commit()
             message = 'Contact deleted successfully.'
         else:
-            name = request.form.get('name')
-            phone = request.form.get('phone')
-            if name and phone:
+            ProductName = request.form.get('ProductName')
+            Reviewer = request.form.get('Reviewer')
+            Date = request.form.get('Date')
+            ProductReview = request.form.get('ProductReview')
+            if ProductName and Reviewer and date and ProductReview:
                 db = get_db()
-                db.execute('INSERT INTO contacts (name, phone) VALUES (?, ?)', (name, phone))
+                db.execute('INSERT INTO reviews (ProductName, Reviewer, Date, ProductReview) VALUES (?, ?, ?, ?)', (ProductName, Reviewer, Date, ProductReview))
                 db.commit()
-                message = 'Contact added successfully.'
+                message = 'Review added successfully.'
             else:
-                message = 'Missing name or phone number.'
+                message = 'Missing information.'
 
     # Always display the contacts table
     db = get_db()
-    contacts = db.execute('SELECT * FROM contacts').fetchall()
+    contacts = db.execute('SELECT * FROM reviews').fetchall()
 
     # Display the HTML form along with the contacts table
     return render_template_string('''
         <!DOCTYPE html>
         <html>
         <head>
-            <title>Contacts</title>
+            <title>Reviews</title>
         </head>
         <body>
-            <h2>Add Contact</h2>
+            <h2>Add Review</h2>
             <form method="POST" action="/">
                 <label for="name">Name:</label><br>
                 <input type="text" id="name" name="name" required><br>
@@ -80,7 +84,7 @@ def index():
                             <td>{{ contact['phone'] }}</td>
                             <td>
                                 <form method="POST" action="/">
-                                    <input type="hidden" name="contact_id" value="{{ contact['id'] }}">
+                                    <input type="hidden" name="reviews_id" value="{{ reviews['id'] }}">
                                     <input type="hidden" name="action" value="delete">
                                     <input type="submit" value="Delete">
                                 </form>
@@ -89,11 +93,11 @@ def index():
                     {% endfor %}
                 </table>
             {% else %}
-                <p>No contacts found.</p>
+                <p>No reviews found.</p>
             {% endif %}
         </body>
         </html>
-    ''', message=message, contacts=contacts)
+    ''', message=message, reviews=reviews)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
