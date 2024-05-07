@@ -18,10 +18,10 @@ def init_db():
         db.execute('''
             CREATE TABLE IF NOT EXISTS reviews (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                ProductName TEXT NOT NULL,
-                Reviewer TEXT NOT NULL,
-                Date TEXT NOT NULL,
-                ProductReview Text Not Null
+                product_name TEXT NOT NULL,
+                reviewer TEXT NOT NULL,
+                date TEXT NOT NULL,
+                product_review Text Not Null
             );
         ''')
         db.commit()
@@ -38,13 +38,13 @@ def index():
             db.commit()
             message = 'Contact deleted successfully.'
         else:
-            ProductName = request.form.get('ProductName')
-            Reviewer = request.form.get('Reviewer')
-            Date = request.form.get('Date')
-            ProductReview = request.form.get('ProductReview')
+            ProductName = request.form.get('product_name')
+            Reviewer = request.form.get('reviewer')
+            Date = request.form.get('date')
+            ProductReview = request.form.get('product_review')
             if ProductName and Reviewer and date and ProductReview:
                 db = get_db()
-                db.execute('INSERT INTO reviews (ProductName, Reviewer, Date, ProductReview) VALUES (?, ?, ?, ?)', (ProductName, Reviewer, Date, ProductReview))
+                db.execute('INSERT INTO reviews (product_name, reviewer, date, product_review) VALUES (?, ?, ?, ?)', (product_name, reviewer, date, product_review))
                 db.commit()
                 message = 'Review added successfully.'
             else:
@@ -64,13 +64,13 @@ def index():
         <body>
             <h2>Add Review</h2>
             <form method="POST" action="/">
-                <label for="name">Name:</label><br>
-                <input type="text" id="name" name="name" required><be>
-                <label for="Date">Date:</label><br>
+                <label for="reviewer">Name:</label><br>
+                <input type="text" id="reviewer" name="reviewer" required><be>
+                <label for="date">Date:</label><br>
                 <input type="text" id="Date" name="Date" required><br><br>
-                <label for="ProductName">Product Name:</label><br>
+                <label for="product_name">Product Name:</label><br>
                 <input type="text" id="ProductName" name="ProductName" required><br><br>
-                <label for="ProductReview">Product Review:</label><br>
+                <label for="product_review">Product Review:</label><br>
                 <input type="text" id="ProductReview" name="ProductReview" required><br><br>
                 
                 <input type="submit" value="Submit">
@@ -87,10 +87,10 @@ def index():
                     </tr>
                     {% for contact in contacts %}
                         <tr>
-                            <td>{{ Reviews['Reviewer'] }}</td>
-                            <td>{{ Reviews['Date'] }}</td>
-                            <td>{{ Reviews['ProductName'] }}</td>
-                            <td>{{ Reviews['ProductReview'] }}</td>
+                            <td>{{ Reviews['reviewer'] }}</td>
+                            <td>{{ Reviews['date'] }}</td>
+                            <td>{{ Reviews['product_name'] }}</td>
+                            <td>{{ Reviews['product_review'] }}</td>
                             <td>
                                 <form method="POST" action="/">
                                     <input type="hidden" name="reviews_id" value="{{ reviews['id'] }}">
