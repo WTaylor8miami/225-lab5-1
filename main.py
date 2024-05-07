@@ -18,10 +18,10 @@ def init_db():
         db.execute('''
             CREATE TABLE IF NOT EXISTS reviews (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                product_name TEXT NOT NULL,
-                reviewer TEXT NOT NULL,
-                date TEXT NOT NULL,
-                product_review Text Not Null
+                ProductName TEXT NOT NULL,
+                Reviewer TEXT NOT NULL,
+                Date TEXT NOT NULL,
+                ProductReview Text Not Null
             );
         ''')
         db.commit()
@@ -38,13 +38,13 @@ def index():
             db.commit()
             message = 'Reviews deleted successfully.'
         else:
-            product_name = request.form.get('product_name')
-            reviewer = request.form.get('reviewer')
-            date = request.form.get('date')
-            product_review = request.form.get('product_review')
-            if product_name and reviewer and date and product_review:
+            ProductName = request.form.get('ProductName')
+            Reviewer = request.form.get('Reviewer')
+            Date = request.form.get('Date')
+            ProductReview = request.form.get('ProductReview')
+            if ProductName and Reviewer and Date and ProductReview:
                 db = get_db()
-                db.execute('INSERT INTO reviews (product_name, reviewer, date, product_review) VALUES (?, ?, ?, ?)', (product_name, reviewer, date, product_review))
+                db.execute('INSERT INTO reviews (ProductName, Reviewer, Date, ProductReview) VALUES (?, ?, ?, ?)', (ProductName, Reviewer, Date, ProductReview))
                 db.commit()
                 message = 'Review added successfully.'
             else:
@@ -64,13 +64,13 @@ def index():
         <body>
             <h2>Add Review</h2>
             <form method="POST" action="/">
-                <label for="reviewer">Name:</label><br>
-                <input type="text" id="reviewer" name="reviewer" required><br>
-                <label for="date">Date:</label><br>
+                <label for="Reviewer">Name:</label><br>
+                <input type="text" id="Reviewer" name="Reviewer" required><br>
+                <label for="Date">Date:</label><br>
                 <input type="text" id="Date" name="Date" required><br><br>
-                <label for="product_name">Product Name:</label><br>
+                <label for="ProductName">Product Name:</label><br>
                 <input type="text" id="ProductName" name="ProductName" required><br><br>
-                <label for="product_review">Product Review:</label><br>
+                <label for="ProductReview">Product Review:</label><br>
                 <input type="text" id="ProductReview" name="ProductReview" required><br><br>
                 
                 <input type="submit" value="Submit">
@@ -87,10 +87,10 @@ def index():
                     </tr>
                     {% for reviews in reviewss %}
                         <tr>
-                            <td>{{ Reviews['reviewer'] }}</td>
-                            <td>{{ Reviews['date'] }}</td>
-                            <td>{{ Reviews['product_name'] }}</td>
-                            <td>{{ Reviews['product_review'] }}</td>
+                            <td>{{ Reviews['Reviewer'] }}</td>
+                            <td>{{ Reviews['Date'] }}</td>
+                            <td>{{ Reviews['ProductName'] }}</td>
+                            <td>{{ Reviews['ProductReview'] }}</td>
                             <td>
                                 <form method="POST" action="/">
                                     <input type="hidden" name="reviews_id" value="{{ reviews['id'] }}">
