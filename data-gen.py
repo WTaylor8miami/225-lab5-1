@@ -7,10 +7,10 @@ def connect_db():
     """Connect to the SQLite database."""
     return sqlite3.connect(DATABASE)
 
-def generate_test_data(num_reviews):
+def generate_test_data(num_Information):
     """Generate test data for the Information table."""
     db = connect_db()
-    for i in range(num_reviews):
+    for i in range(num_Information):
         Name = f'Test Name {i}'
         Address = f'Test Address {i}'
         Date = f'Test Name{i}'
