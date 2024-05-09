@@ -16,12 +16,14 @@ def init_db():
     with app.app_context():
         db = get_db()
         db.execute('''
-            CREATE TABLE IF NOT EXISTS reviews (
+            CREATE TABLE IF NOT EXISTS Information (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                ProductName TEXT NOT NULL,
-                Reviewer TEXT NOT NULL,
+                Name TEXT NOT NULL,
+                Address TEXT NOT NULL,
                 Date TEXT NOT NULL,
-                ProductReview Text Not Null
+                Email Text Not Null,
+                Favorite Food Text Not Null,
+                Favorite Drink Text Not Null
             );
         ''')
         db.commit()
@@ -32,68 +34,78 @@ def index():
     if request.method == 'POST':
         # Check if it's a delete action
         if request.form.get('action') == 'delete':
-            reviews_id = request.form.get('reviews_id')
+            Information_id = request.form.get('Information_id')
             db = get_db()
-            db.execute('DELETE FROM reviews WHERE id = ?', (reviews_id,))
+            db.execute('DELETE FROM Information WHERE id = ?', (information_id,))
             db.commit()
-            message = 'Reviews deleted successfully.'
+            message = 'Information deleted successfully.'
         else:
-            ProductName = request.form.get('ProductName')
-            Reviewer = request.form.get('Reviewer')
+            Name = request.form.get('Name')
+            Address = request.form.get('Address')
             Date = request.form.get('Date')
-            ProductReview = request.form.get('ProductReview')
-            if ProductName and Reviewer and Date and ProductReview:
+            Email = request.form.get('Email')
+            Favorite Food = request.form.get('Favorite Food')
+            Favorite Drink = request.form.get('Favorite Drink')
+            if Name and Address and Date and Email and Favorite Food and Favorite Drink:
                 db = get_db()
-                db.execute('INSERT INTO reviews (ProductName, Reviewer, Date, ProductReview) VALUES (?, ?, ?, ?)', (ProductName, Reviewer, Date, ProductReview))
+                db.execute('INSERT INTO Information (Name, Address, Date, Email, Favorite Food, Favorite Drink) VALUES (?, ?, ?, ?, ?, ?)', (Name, Address, Date, Email, Favorite Food, Favorite Drink))
                 db.commit()
-                message = 'Review added successfully.'
+                message = 'Information added successfully.'
             else:
                 message = 'Missing information.'
 
-    # Always display the reviewss table
+    # Always display the Information table
     db = get_db()
-    reviews = db.execute('SELECT * FROM reviews').fetchall()
+    Information = db.execute('SELECT * FROM Information').fetchall()
 
-    # Display the HTML form along with the reviewss table
+    # Display the HTML form along with the Information table
     return render_template_string('''
         <!DOCTYPE html>
         <html>
         <head>
-            <title>Reviews</title>
+            <title>Food Information</title>
         </head>
         <body>
-            <h2>Add Review</h2>
+            <h2>Add Information</h2>
             <form method="POST" action="/">
-                <label for="Reviewer">Reviewer:</label><br>
-                <input type="text" id="Reviewer" name="Reviewer" required><br>
+                <label for="Name">Name:</label><br>
+                <input type="text" id="Name" name="Name" required><br>
+                <label for="Address">Address:</label><br>
+                <input type="text" id="Address" name="Address" required><br>
                 <label for="Date">Date:</label><br>
                 <input type="text" id="Date" name="Date" required><br><br>
-                <label for="ProductName">Product Name:</label><br>
-                <input type="text" id="ProductName" name="ProductName" required><br><br>
-                <label for="ProductReview">Product Review:</label><br>
-                <input type="text" id="ProductReview" name="ProductReview" required><br><br>
+                <label for="Email">Email:</label><br>
+                <input type="text" id="Email" name="Email" required><br><br>
+                <label for="Favorite Food">Favorite Food:</label><br>
+                <input type="text" id="Favorite Food" name="Favorite Food" required><br><br>
+                <label for="">Favorite Drink:</label><br>
+                <input type="text" id="Favorite Drink" name="Favorite Drink" required><br><br>
                 
                 <input type="submit" value="Submit">
             </form>
             <p>{{ message }}</p>
-            {% if reviews %}
+            {% if Information %}
                 <table border="1">
                     <tr>
-                        <th>Reviewer</th>
+                        <th>Name</th>
+                        <th>Address</th>
                         <th>Date</th>
-                        <th>Product Name</th>
-                        <th>Prodcut Review</th>
+                        <th>Email</th>
+                        <th>Favorite Food</th>
+                        <th>Favorite Drink</th>
                         <th>Delete</th>
                     </tr>
-                    {% for reviews in reviews %}
+                    {% for Information in Information %}
                         <tr>
-                            <td>{{ reviews['Reviewer'] }}</td>
-                            <td>{{ reviews['Date'] }}</td>
-                            <td>{{ reviews['ProductName'] }}</td>
-                            <td>{{ reviews['ProductReview'] }}</td>
+                            <td>{{ Information['Name'] }}</td>
+                            <td>{{ Information['Address'] }}</td>
+                            <td>{{ Information['Date'] }}</td>
+                            <td>{{ Information['Email'] }}</td>
+                            <td>{{ Information['Favorite Food'] }}</td>
+                            <td>{{ Information['Favorite Drink'] }}</td>
                             <td>
                                 <form method="POST" action="/">
-                                    <input type="hidden" name="reviews_id" value="{{ reviews['id'] }}">
+                                    <input type="hidden" name="Information_id" value="{{ Information['id'] }}">
                                     <input type="hidden" name="action" value="delete">
                                     <input type="submit" value="Delete">
                                 </form>
@@ -102,11 +114,11 @@ def index():
                     {% endfor %}
                 </table>
             {% else %}
-                <p>No reviews found.</p>
+                <p>No Information found.</p>
             {% endif %}
         </body>
         </html>
-    ''', message=message, reviews=reviews)
+    ''', message=message, Information=Information)
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
