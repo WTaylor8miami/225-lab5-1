@@ -36,7 +36,7 @@ def index():
         if request.form.get('action') == 'delete':
             Information_id = request.form.get('Information_id')
             db = get_db()
-            db.execute('DELETE FROM Information WHERE id = ?', (information_id,))
+            db.execute('DELETE FROM Information WHERE id = ?', (Information_id,))
             db.commit()
             message = 'Information deleted successfully.'
         else:
