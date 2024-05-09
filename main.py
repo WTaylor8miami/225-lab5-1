@@ -22,8 +22,8 @@ def init_db():
                 Address TEXT NOT NULL,
                 Date TEXT NOT NULL,
                 Email Text Not Null,
-                Favorite Food Text Not Null,
-                Favorite Drink Text Not Null
+                Favorite_Food Text Not Null,
+                Favorite_Drink Text Not Null
             );
         ''')
         db.commit()
@@ -44,11 +44,11 @@ def index():
             Address = request.form.get('Address')
             Date = request.form.get('Date')
             Email = request.form.get('Email')
-            Favorite Food = request.form.get('Favorite Food')
-            Favorite Drink = request.form.get('Favorite Drink')
-            if Name and Address and Date and Email and Favorite Food and Favorite Drink:
+            Favorite_Food = request.form.get('Favorite_Food')
+            Favorite_Drink = request.form.get('Favorite_Drink')
+            if Name and Address and Date and Email and Favorite_Food and Favorite_Drink:
                 db = get_db()
-                db.execute('INSERT INTO Information (Name, Address, Date, Email, Favorite Food, Favorite Drink) VALUES (?, ?, ?, ?, ?, ?)', (Name, Address, Date, Email, Favorite Food, Favorite Drink))
+                db.execute('INSERT INTO Information (Name, Address, Date, Email, Favorite_Food, Favorite_Drink) VALUES (?, ?, ?, ?, ?, ?)', (Name, Address, Date, Email, Favorite_Food, Favorite_Drink))
                 db.commit()
                 message = 'Information added successfully.'
             else:
@@ -76,10 +76,10 @@ def index():
                 <input type="text" id="Date" name="Date" required><br><br>
                 <label for="Email">Email:</label><br>
                 <input type="text" id="Email" name="Email" required><br><br>
-                <label for="Favorite Food">Favorite Food:</label><br>
-                <input type="text" id="Favorite Food" name="Favorite Food" required><br><br>
-                <label for="Favorite Drink">Favorite Drink:</label><br>
-                <input type="text" id="Favorite Drink" name="Favorite Drink" required><br><br>
+                <label for="Favorite_Food">Favorite_Food:</label><br>
+                <input type="text" id="Favorite_Food" name="Favorite_Food" required><br><br>
+                <label for="Favorite_Drink">Favorite_Drink:</label><br>
+                <input type="text" id="Favorite_Drink" name="Favorite_Drink" required><br><br>
                 
                 <input type="submit" value="Submit">
             </form>
@@ -91,8 +91,8 @@ def index():
                         <th>Address</th>
                         <th>Date</th>
                         <th>Email</th>
-                        <th>Favorite Food</th>
-                        <th>Favorite Drink</th>
+                        <th>Favorite_Food</th>
+                        <th>Favorite_Drink</th>
                         <th>Delete</th>
                     </tr>
                     {% for Information in Information %}
@@ -101,8 +101,8 @@ def index():
                             <td>{{ Information['Address'] }}</td>
                             <td>{{ Information['Date'] }}</td>
                             <td>{{ Information['Email'] }}</td>
-                            <td>{{ Information['Favorite Food'] }}</td>
-                            <td>{{ Information['Favorite Drink'] }}</td>
+                            <td>{{ Information['Favorite_Food'] }}</td>
+                            <td>{{ Information['Favorite_Drink'] }}</td>
                             <td>
                                 <form method="POST" action="/">
                                     <input type="hidden" name="Information_id" value="{{ Information['id'] }}">
