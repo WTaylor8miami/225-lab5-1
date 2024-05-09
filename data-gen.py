@@ -8,16 +8,18 @@ def connect_db():
     return sqlite3.connect(DATABASE)
 
 def generate_test_data(num_reviews):
-    """Generate test data for the reviews table."""
+    """Generate test data for the Information table."""
     db = connect_db()
     for i in range(num_reviews):
-        ProductName = f'Test Name {i}'
-        Reviewer = f'Test Name {i}'
+        Name = f'Test Name {i}'
+        Address = f'Test Address {i}'
         Date = f'Test Name{i}'
-        ProductReview = f'Test Name!{i}'
-        db.execute('INSERT INTO reviews (Date, ProductName, Reviewer, ProductReview) VALUES (?, ?, ?, ?)', (Date, ProductName, Reviewer, ProductReview))
+        Email = f'Test Email!{i}'
+        Favorite Food = f'Test Food!{i}'
+        Favorite Drink = f'Test Drink!{i}'
+        db.execute('INSERT INTO Information (Name, Address, Date, Email, Favorite Food, Favorite Drink) VALUES (?, ?, ?, ?, ?, ?)', (Name, Address, Date, Email, Favorite Food, Favorite Drink))
     db.commit()
-    print(f'{num_reviews} test reviews added to the database.')
+    print(f'{num_Information} test Information added to the database.')
     db.close()
 
 if __name__ == '__main__':
