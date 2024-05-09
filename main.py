@@ -78,7 +78,7 @@ def index():
                 <input type="text" id="Email" name="Email" required><br><br>
                 <label for="Favorite Food">Favorite Food:</label><br>
                 <input type="text" id="Favorite Food" name="Favorite Food" required><br><br>
-                <label for="">Favorite Drink:</label><br>
+                <label for="Favorite Drink">Favorite Drink:</label><br>
                 <input type="text" id="Favorite Drink" name="Favorite Drink" required><br><br>
                 
                 <input type="submit" value="Submit">
